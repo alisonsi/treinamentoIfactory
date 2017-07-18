@@ -37,7 +37,7 @@ public class AuthorController {
         if(created){
             status = 201;
         }else{
-            status = 400;
+            status = 409;
         }
         System.out.println(created);
         URI location = new URI("http://localhost:8080/authors/"+author.getId());

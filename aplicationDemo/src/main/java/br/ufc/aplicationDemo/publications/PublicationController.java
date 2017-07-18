@@ -3,10 +3,7 @@ package br.ufc.aplicationDemo.publications;
 import br.ufc.aplicationDemo.publishers.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -30,10 +27,9 @@ public class PublicationController {
         if(created){
             status = 201;
         }else{
-            status = 400;
+            status = 409;
         }
-        System.out.println(created);
-        URI location = new URI("http://localhost:8080/authors/" + publication.getCode());
+        URI location = new URI("http://localhost:8080/publication/" + publication.getCode());
 
 
         return ResponseEntity.status(status).location(location)
@@ -47,4 +43,53 @@ public class PublicationController {
 
         return ResponseEntity.ok(repository.findAll());
     }
+
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.PUT
+    )
+    public ResponseEntity<Publication> updateAuthor(@RequestBody Publication publication, @PathVariable("id") Integer id ){
+
+        int status = 201;
+
+        Publication publicationUpdate = repository.update(id, publication);
+        if(publicationUpdate==null){
+            status = 404;
+        }
+
+        return ResponseEntity.status(status).body(publicationUpdate);
+    }
+
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<Publication> findOnePublication(@PathVariable("id") Integer id ){
+
+        int status = 200;
+        Publication publication = repository.findOne(id);
+        if(publication == null){
+            status = 404;
+        }
+
+        return ResponseEntity.status(status).body(publication);
+    }
+
+
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.DELETE
+    )
+    public ResponseEntity<Publication> deleteAuthor(@PathVariable("id") Integer id ){
+        //Deletando um autor
+        int status = 200;
+        Publication publication = repository.delete(id);
+        if(publication == null){
+            status = 404;
+        }
+
+        return ResponseEntity.status(status).body(publication);
+    }
+
+
 }

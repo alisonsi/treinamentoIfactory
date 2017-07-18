@@ -1,5 +1,7 @@
 package br.ufc.aplicationDemo.publishers;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,10 +10,9 @@ import java.util.List;
 /**
  * Created by Alisonsi on 18/07/2017.
  */
+@Component
 public class InMemoryPublisherRepository implements  PublisherRepository{
     private  static  final List<Publisher> PUBLISHERS = new ArrayList<>();
-
-
 
     static {
         PUBLISHERS.addAll(Arrays.asList(
@@ -57,10 +58,13 @@ public class InMemoryPublisherRepository implements  PublisherRepository{
     @Override
     public Publisher update(int ENI, Publisher publisher) {
         if(publisher == null){
-            throw new IllegalArgumentException("Sua publicação nao pode ser nula");
+            throw new IllegalArgumentException("Sua editora nao pode ser nula");
         }
         Publisher selectedPublisher = findOne(ENI);
 
+        selectedPublisher.setName(publisher.getName());
+        selectedPublisher.setDirector(publisher.getDirector());
+        
         int index = PUBLISHERS.indexOf(selectedPublisher);
 
         PUBLISHERS.set(index,selectedPublisher);

@@ -67,6 +67,8 @@ public class InMemoryPublicationRepository implements PublicationsRepository{
         }
         Publication selectPublication = findOne(codePublication);
 
+        selectPublication.setPublisher(publication.getPublisher());
+        selectPublication.setAuthor(publication.getAuthor());
         selectPublication.setTitle(publication.getTitle());
         selectPublication.setType(publication.getType());
         selectPublication.setDescription(publication.getDescription());
