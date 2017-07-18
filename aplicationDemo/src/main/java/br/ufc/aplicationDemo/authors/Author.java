@@ -1,4 +1,4 @@
-package br.ufc.aplicationDemo.author;
+package br.ufc.aplicationDemo.authors;
 
 /**
  * Created by Alisonsi on 17/07/2017.

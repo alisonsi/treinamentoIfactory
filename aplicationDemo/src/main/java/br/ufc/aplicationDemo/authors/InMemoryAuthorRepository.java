@@ -1,9 +1,8 @@
-package br.ufc.aplicationDemo.author;
+package br.ufc.aplicationDemo.authors;
 
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by Alisonsi on 17/07/2017.
@@ -43,7 +42,7 @@ public class InMemoryAuthorRepository implements AuthorRepository{
     @Override
     public Author update(int idAuthor, Author author) {
         if(author == null){
-            throw new IllegalArgumentException("author nao pode ser nulo");
+            throw new IllegalArgumentException("authors nao pode ser nulo");
         }
         Author selectAuthor = findOne(idAuthor);
 

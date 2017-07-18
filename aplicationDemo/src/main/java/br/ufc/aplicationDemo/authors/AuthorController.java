@@ -1,19 +1,11 @@
-package br.ufc.aplicationDemo.author;
-import org.apache.coyote.Response;
+package br.ufc.aplicationDemo.authors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Alisonsi on 17/07/2017.
@@ -48,7 +40,7 @@ public class AuthorController {
             status = 400;
         }
         System.out.println(created);
-        URI location = new URI("http://localhost:8080/authors" );
+        URI location = new URI("http://localhost:8080/authors/"+author.getId());
 
 
         return ResponseEntity.status(status).location(location)
@@ -97,7 +89,7 @@ public class AuthorController {
             produces = "application/json"
     )
     public ResponseEntity<Author> deleteAuthor(@PathVariable("id") Integer id ){
-
+        //Deletando um autor
         int status = 200;
         Author author = repository.delete(id);
         if(author == null){
