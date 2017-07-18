@@ -1,4 +1,5 @@
 package br.ufc.aplicationDemo.authors;
+import br.ufc.aplicationDemo.publications.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -99,4 +100,11 @@ public class AuthorController {
         return ResponseEntity.status(status).body(author);
     }
 
+    @RequestMapping(
+            value = "{id}/publications",
+            method = RequestMethod.GET
+    )
+    public ResponseEntity<Iterable<Publication>> findPublicationsOfAuthor(@PathVariable("id") Integer idAuthor){
+        return ResponseEntity.ok(repository.findPublicationsOfAuthor(idAuthor));
+    }
 }

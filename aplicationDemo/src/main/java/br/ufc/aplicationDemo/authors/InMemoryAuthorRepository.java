@@ -1,5 +1,8 @@
 package br.ufc.aplicationDemo.authors;
 
+import br.ufc.aplicationDemo.publications.Publication;
+import br.ufc.aplicationDemo.publications.PublicationsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -9,6 +12,10 @@ import java.util.*;
  */
 @Component
 public class InMemoryAuthorRepository implements AuthorRepository{
+
+    @Autowired
+    PublicationsRepository publicationsRepository;
+
     private  static  final List<Author> AUTHORS = new ArrayList<>();
 
 
@@ -74,4 +81,8 @@ public class InMemoryAuthorRepository implements AuthorRepository{
 
     }
 
+    @Override
+    public Iterable<Publication> findPublicationsOfAuthor(int idAuthor) {
+        return publicationsRepository.findPublicationsOfAuthor(idAuthor);
+    }
 }

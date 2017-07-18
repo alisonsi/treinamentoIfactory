@@ -4,10 +4,8 @@ import br.ufc.aplicationDemo.authors.Author;
 import br.ufc.aplicationDemo.publishers.Publisher;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Alisonsi on 18/07/2017.
@@ -78,5 +76,16 @@ public class InMemoryPublicationRepository implements PublicationsRepository{
         PUBLICATION.set(index,selectPublication);
 
         return selectPublication;
+    }
+
+    @Override
+    public Iterable<Publication> findPublicationsOfAuthor(int idAuthor) {
+
+        Collection<Publication> publications = PUBLICATION
+                .stream()
+                .filter(c -> c.getAuthor().equals(idAuthor))
+                .collect(Collectors.toList());
+
+        return publications;
     }
 }

@@ -64,7 +64,7 @@ public class InMemoryPublisherRepository implements  PublisherRepository{
 
         selectedPublisher.setName(publisher.getName());
         selectedPublisher.setDirector(publisher.getDirector());
-        
+
         int index = PUBLISHERS.indexOf(selectedPublisher);
 
         PUBLISHERS.set(index,selectedPublisher);

@@ -11,5 +11,5 @@ public interface PublicationsRepository {
     Publication findOne(int codePublication); // select one
     Publication delete(int codePublication); // delete
     Publication update(int codePublication, Publication publication); // update
-
+    Iterable<Publication> findPublicationsOfAuthor(int idAuthor);
 }
