@@ -1,6 +1,8 @@
 package br.ufc.aplicationDemo.authors;
 import br.ufc.aplicationDemo.publications.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.boot.json.JsonParser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,7 @@ public class AuthorController {
     )
     @ResponseBody
     public ResponseEntity<Iterable<Author>> queryAllAuthors(){
+
         return ResponseEntity.ok(repository.findAll());
         //retorna todos os autores
 
@@ -34,8 +37,8 @@ public class AuthorController {
     public ResponseEntity<Void> createAuthor(@RequestBody Author author) throws MalformedURLException, URISyntaxException{
         //cria um autor
         int status;
-        boolean created = repository.save(author);
-        if(created){
+        Object created = repository.save(author);
+        if(created != null){
             status = 201;
         }else{
             status = 409;
@@ -48,24 +51,24 @@ public class AuthorController {
                 .build();
 
     }
-    @RequestMapping(
-            value = "/{id}",
-            method = RequestMethod.PUT,
-            produces = "application/json"
-    )
-    public ResponseEntity<Author> updateAuthor(@RequestBody Author author, @PathVariable("id") Integer id ){
-        //atualiza um autor
-        int status;
-
-        Author authorUpdate = repository.update(id, author);
-        if(authorUpdate!=null){
-            status = 201;
-        }else{
-            status = 400;
-        }
-
-        return ResponseEntity.status(status).body(authorUpdate);
-    }
+//    @RequestMapping(
+//            value = "/{id}",
+//            method = RequestMethod.PUT,
+//            produces = "application/json"
+////    )
+//    public ResponseEntity<Author> updateAuthor(@RequestBody Author author, @PathVariable("id") Integer id ){
+//        //atualiza um autor
+//        int status;
+//
+//        Author authorUpdate = repository.update(id, author);
+//        if(authorUpdate!=null){
+//            status = 201;
+//        }else{
+//            status = 400;
+//        }
+//
+//        return ResponseEntity.status(status).body(authorUpdate);
+//    }
 
     @RequestMapping(
             value = "/{id}",
@@ -89,22 +92,13 @@ public class AuthorController {
             method = RequestMethod.DELETE,
             produces = "application/json"
     )
-    public ResponseEntity<Author> deleteAuthor(@PathVariable("id") Integer id ){
+    public ResponseEntity<Void> deleteAuthor(@PathVariable("id") Integer id ){
         //Deletando um autor
         int status = 200;
-        Author author = repository.delete(id);
-        if(author == null){
-            status = 404;
-        }
+        repository.delete(id);
 
-        return ResponseEntity.status(status).body(author);
+        return ResponseEntity.accepted().build();
     }
 
-    @RequestMapping(
-            value = "{id}/publications",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<Iterable<Publication>> findPublicationsOfAuthor(@PathVariable("id") Integer idAuthor){
-        return ResponseEntity.ok(repository.findPublicationsOfAuthor(idAuthor));
-    }
+
 }

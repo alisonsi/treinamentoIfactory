@@ -23,8 +23,8 @@ public class PublisherController {
     )
     public ResponseEntity<Void> create(@RequestBody Publisher publisher) throws URISyntaxException {
         int status;
-        boolean created = repository.save(publisher);
-        if(created){
+        Object created = repository.save(publisher);
+        if(created != null){
             status = 201;
         }else{
             status = 409;
@@ -44,21 +44,21 @@ public class PublisherController {
         return ResponseEntity.ok(repository.findAll());
     }
 
-    @RequestMapping(
-            value = "/{id}",
-            method = RequestMethod.PUT
-    )
-    public ResponseEntity<Publisher> updatePublisher(@RequestBody Publisher publisher, @PathVariable("id") Integer id ){
-
-        int status = 201;
-
-        Publisher publisherUpdate = repository.update(id, publisher);
-        if(publisherUpdate == null){
-            status = 404;
-        }
-
-        return ResponseEntity.status(status).body(publisherUpdate);
-    }
+//    @RequestMapping(
+//            value = "/{id}",
+//            method = RequestMethod.PUT
+//    )
+//    public ResponseEntity<Publisher> updatePublisher(@RequestBody Publisher publisher, @PathVariable("id") Integer id ){
+//
+//        int status = 201;
+//
+//        Publisher publisherUpdate = repository.update(id, publisher);
+//        if(publisherUpdate == null){
+//            status = 404;
+//        }
+//
+//        return ResponseEntity.status(status).body(publisherUpdate);
+//    }
 
     @RequestMapping(
             value = "/{id}",
@@ -82,12 +82,10 @@ public class PublisherController {
     )
     public ResponseEntity<Publisher> deletePublisher(@PathVariable("id") Integer id ){
         int status = 200;
-        Publisher publisher = repository.delete(id);
-        if(publisher == null){
-            status = 404;
-        }
+        repository.delete(id);
 
-        return ResponseEntity.status(status).body(publisher);
+
+        return ResponseEntity.accepted().build();
     }
 
 
