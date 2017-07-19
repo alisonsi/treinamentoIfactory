@@ -27,8 +27,9 @@ public class Publisher {
     @OneToMany(mappedBy = "publisher")
     private Collection<Publication> publications;
 
-
-//    public Publisher(Integer ENI, String name, String director) {
+    public Publisher() {
+    }
+    //    public Publisher(Integer ENI, String name, String director) {
 //        this.ENI = ENI;
 //        this.name = name;
 //        this.director = director;

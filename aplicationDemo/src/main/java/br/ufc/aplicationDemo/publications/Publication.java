@@ -32,7 +32,10 @@ public class Publication {
 
     private String description;
 
-//
+    public Publication() {
+    }
+
+    //
 //    public Publication(Author author, Publisher publisher, String title, Integer id, String type, String description) {
 //        this.author = author;
 //        this.publisher = publisher;
