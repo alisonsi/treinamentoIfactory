@@ -1,0 +1,14 @@
+.button-link {
+  margin-top: 10%;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  background: #7634d9;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.button-link:hover {
+  background: #3c5cfc;
+  text-decoration: none;
+}

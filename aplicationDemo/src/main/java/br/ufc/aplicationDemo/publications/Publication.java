@@ -25,10 +25,10 @@ public class Publication {
     @ManyToOne
     private Publisher publisher;
 
-    private String title;
-
     @Enumerated(EnumType.STRING)
     private PublicationType type;
+
+    private String title;
 
     private String description;
 

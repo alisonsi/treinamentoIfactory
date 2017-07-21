@@ -1,0 +1,38 @@
+.button-info{
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  background: #34d939;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  
+}
+.button-info:hover {
+  background: #3c5cfc;
+  text-decoration: none;
+}
+
+.button-danger{
+ font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  background: #d93f34;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+.button-danger:hover {
+  background: #3c5cfc;
+  text-decoration: none;
+}
+.button-sucess{
+ font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  background: #34d939;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+.button-sucess:hover {
+  background: #3c5cfc;
+  text-decoration: none;
+}
